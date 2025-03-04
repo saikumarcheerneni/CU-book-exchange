@@ -1,0 +1,55 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Textbooks for {{ course_code }}</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <h1>Textbooks for Course: {{ course_code }}</h1>
+
+    {% if textbooks %}
+        <ul>
+        {% for textbook in textbooks %}
+            <li>
+                <h3>{{ textbook.title }}</h3>
+                <p><strong>Author:</strong> {{ textbook.author }}</p>
+                {% if textbook.edition %}
+                    <p><strong>Edition:</strong> {{ textbook.edition }}</p>
+                {% endif %}
+                <p><strong>Condition:</strong> {{ textbook.get_condition_display }}</p>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No textbooks found for this course code.</p>
+    {% endif %}
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Textbooks for {{ course_code }}</title>
+</head>
+<body>
+    <h1>Textbooks Available for {{ course_code }}</h1>
+    
+    {% if no_results %}
+        <p>No textbooks are currently available for this course.</p>
+    {% else %}
+        <ul>
+            {% for textbook in textbooks %}
+                <li>
+                    <strong>{{ textbook.title }}</strong><br>
+                    Author: {{ textbook.author }}<br>
+                    Edition: {{ textbook.edition|default:"N/A" }}<br>
+                    Condition: {{ textbook.get_condition_display }}<br>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>
