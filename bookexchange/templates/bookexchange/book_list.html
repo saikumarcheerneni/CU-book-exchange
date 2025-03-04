@@ -81,13 +81,31 @@
             margin: 50px auto;
             max-width: 600px; 
         }
+        .logo-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 150px; 
+            height: 150px; 
+            z-index: 1000; 
+        }
+        .logo {
+            width: 100%;  
+            height: auto;  
+            background-color: transparent; 
+        }
+        
     </style>
 </head>
 <body>
     <header>
         <h1>Textbooks Available for {{ course_code }}</h1>
     </header>
-
+     
+    <div class="logo-container">
+        <img src="{% static 'bookexchange/logo.jpg' %}" alt="Logo" class="logo">
+    </div> 
+    
     <div class="container">
         {% if no_results %}
         <div class="no-results-message">
