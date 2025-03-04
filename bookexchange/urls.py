@@ -1,11 +1,10 @@
-# bookexchange/urls.py
 from django.urls import path
-from .views import TextbooksByCourseView
+from . import views
 
 urlpatterns = [
-    path('textbooks/<str:course_code>/', TextbooksByCourseView.as_view(), name='textbooks_by_course'),
-]
 
+    path('textbooks/<str:course_code>/', views.textbooks_by_course, name='textbooks_by_course'),
+]
 
 
 

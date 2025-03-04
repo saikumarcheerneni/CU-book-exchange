@@ -1,55 +1,112 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Textbooks for {{ course_code }}</title>
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-</head>
-<body>
-    <h1>Textbooks for Course: {{ course_code }}</h1>
+{% load static %}
 
-    {% if textbooks %}
-        <ul>
-        {% for textbook in textbooks %}
-            <li>
-                <h3>{{ textbook.title }}</h3>
-                <p><strong>Author:</strong> {{ textbook.author }}</p>
-                {% if textbook.edition %}
-                    <p><strong>Edition:</strong> {{ textbook.edition }}</p>
-                {% endif %}
-                <p><strong>Condition:</strong> {{ textbook.get_condition_display }}</p>
-            </li>
-        {% endfor %}
-        </ul>
-    {% else %}
-        <p>No textbooks found for this course code.</p>
-    {% endif %}
-</body>
-</html> -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Textbooks for {{ course_code }}</title>
+    
+    <style>
+     
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;  
+            background-image: url("{% static 'bookexchange/cu.jpg' %}"); 
+            background-size: cover;
+            background-position: center;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            background-attachment: fixed;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.6);  
+            color: maroon;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin-top: 30px;
+        }
+
+        .book-item {
+            background-color: WHITE;
+            padding: 15px;
+            margin: 15px;
+            width: 250px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .book-item:hover {
+            transform: scale(1.05);
+        }
+
+        .book-image {
+            max-width: 100%;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .book-info {
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .book-item {
+                width: 80%;
+            }
+        }
+        .no-results-message {
+            font-size: 1.8em; 
+            font-weight: bold;
+            color: white; 
+            background-color: rgba(255, 0, 0, 0.7); 
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 50px auto;
+            max-width: 600px; 
+        }
+    </style>
 </head>
 <body>
-    <h1>Textbooks Available for {{ course_code }}</h1>
-    
-    {% if no_results %}
-        <p>No textbooks are currently available for this course.</p>
-    {% else %}
-        <ul>
+    <header>
+        <h1>Textbooks Available for {{ course_code }}</h1>
+    </header>
+
+    <div class="container">
+        {% if no_results %}
+        <div class="no-results-message">
+            No textbooks are currently available for this course.
+        </div>
+        {% else %}
             {% for textbook in textbooks %}
-                <li>
-                    <strong>{{ textbook.title }}</strong><br>
-                    Author: {{ textbook.author }}<br>
-                    Edition: {{ textbook.edition|default:"N/A" }}<br>
-                    Condition: {{ textbook.get_condition_display }}<br>
-                </li>
+                <div class="book-item">
+                    <img src="{% static 'bookexchange/book.jpg' %}" alt="Book Image" class="book-image">
+                    <div class="book-info">
+                        <strong>{{ textbook.title }}</strong><br>
+                        Author: {{ textbook.author }}<br>
+                        Edition: {{ textbook.edition|default:"N/A" }}<br>
+                        Condition: {{ textbook.get_condition_display }}<br>
+                    </div>
+                </div>
             {% endfor %}
-        </ul>
-    {% endif %}
+        {% endif %}
+    </div>
+
 </body>
 </html>

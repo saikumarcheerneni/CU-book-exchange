@@ -1,10 +1,9 @@
-# # bookexchange/models.py
 from django.db import models
 
 class Textbook(models.Model):
     title = models.CharField(max_length=200)
     author = models.CharField(max_length=200)
-    edition = models.CharField(max_length=50, null=True, blank=True)  # Edition is optional
+    edition = models.CharField(max_length=50, null=True, blank=True)  
     condition_choices = [
         ('new', 'New'),
         ('used', 'Used'),
